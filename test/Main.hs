@@ -29,8 +29,10 @@ main = do
   genGhcPkgCache `mapM_` pkgDirs
 
   let stackDir = "test/data/stack-project"
-  _ <- withDirectory stackDir $ \_ -> system "stack init --force"
-                                   >> system "stack build"
+  withDirectory_ stackDir $ do
+      system "stack init --force"
+      system "stack build"
+      return ()
 
   let caches = [ "setup-config"
                , "setup-config.ghc-mod.cabal-helper"
