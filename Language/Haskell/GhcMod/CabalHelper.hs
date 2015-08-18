@@ -117,7 +117,7 @@ prepareCabalHelper :: (IOish m, GmEnv m, GmLog m) => m ()
 prepareCabalHelper = do
   crdl <- cradle
   let projdir = cradleRootDir crdl
-      distdir = projdir </> "dist"
+      distdir = projdir </> cradleDistDir crdl
   readProc <- gmReadProcess
   when (cradleProjectType crdl == CabalProject) $
        withCabal $ liftIO $ prepare readProc projdir distdir
@@ -151,7 +151,7 @@ withCabal action = do
     readProc <- gmReadProcess
 
     let projdir = cradleRootDir crdl
-        distdir = projdir </> "dist"
+        distdir = projdir </> cradleDistDir crdl
 
     mCabalFile <- liftIO $ timeFile `traverse` cradleCabalFile crdl
     mCabalConfig <- liftIO $ timeMaybe (setupConfigFile crdl)
@@ -226,14 +226,14 @@ chCached :: (Applicative m, IOish m, GmEnv m, GmState m, GmLog m, Serialize a)
 chCached c = do
   root <- cradleRootDir <$> cradle
   dist <- cradleDistDir <$> cradle
-  d <- cacheInputData root
+  d <- cacheInputData root dist
   withCabal $ cached root (c dist) d
  where
-   cacheInputData root = do
+   cacheInputData root dist = do
                opt <- options
                return $ ( helperProgs opt
                         , root
-                        , root </> "dist"
+                        , root </> dist
                         , (gmVer, chVer)
                         )
 
