@@ -12,10 +12,8 @@ import TestUtils
 
 main :: IO ()
 main = do
-  _ <- withDirectory_ "test/data/stack-project" $ do
-    system "stack init --force"
-    system "stack setup"
-    system "stack build"
+  void $ withDirectory_ "test/data/cabal-project" $ do
+    void $ system "ls .."
 
   let sandboxes = [ "test/data/cabal-project"
                   , "test/data/check-packageid"
