@@ -12,7 +12,7 @@ main = doctest
   , "-XScopedTypeVariables", "-XRecordWildCards", "-XNamedFieldPuns", "-XConstraintKinds", "-XFlexibleContexts", "-XDataKinds", "-XKindSignatures", "-XTypeOperators"
   , "-idist/build/autogen/"
   , "-optP-include"
-  , "-optPdst/build/autogen/cabal_macros.h"
+  , "-optPdist/build/autogen/cabal_macros.h"
   -- , "-optP.stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/autogen/cabal_macros.h"
   , "Language/Haskell/GhcMod.hs"
   ]
