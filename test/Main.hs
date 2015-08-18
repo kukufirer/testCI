@@ -12,8 +12,8 @@ import TestUtils
 
 main :: IO ()
 main = do
-  void $ withDirectory_ "test/data/cabal-project" $ do
-    void $ system "ls .."
+  void $ withDirectory_ "test/data/stack-project" $ do
+    void $ system "ls -lR .."
 
   let sandboxes = [ "test/data/cabal-project"
                   , "test/data/check-packageid"
