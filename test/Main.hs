@@ -13,7 +13,8 @@ import TestUtils
 main :: IO ()
 main = do
   void $ withDirectory_ "test/data/stack-project" $ do
-    void $ system "ls -lR .."
+    void $ system "stack init --force"
+    void $ system "stack build"
 
   let sandboxes = [ "test/data/cabal-project"
                   , "test/data/check-packageid"
