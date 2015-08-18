@@ -31,7 +31,9 @@ before_install:
 
 after_failure:
   - cat dist/test/ghc-mod-5.3.0.0-spec.log
-  - ls test/data/stack-project
+  - ls -lR test/data/stack-project
+  # - ls -lR .
+  - ls -lR test
 
 install:
   - cabal update
