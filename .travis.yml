@@ -29,6 +29,9 @@ before_install:
   - export PATH=$(pwd)/stack-bin:$PATH
   - stack --version
 
+after_failure:
+  - cat /home/travis/builds/kukufirer/testCI/dist/test/ghc-mod-5.3.0.0-spec.log
+
 install:
   - cabal update
 #  - ( $CABAL122 && cabal install cabal-install --constraint "Cabal >= 1.22" && ghc-pkg unregister Cabal ) || true
